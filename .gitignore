@@ -4,3 +4,5 @@ elastic-certificates.p12
 *.pyc
 index.yaml
 *.tgz
+.idea/
+helm-charts.iml
