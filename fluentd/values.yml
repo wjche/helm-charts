@@ -11,7 +11,7 @@ image:
 
 output:
   host: logstash
-  port: 5044
+  port: 8080
   scheme: tcp
   sslVersion: TLSv1
   buffer_chunk_limit: 2M
@@ -104,14 +104,15 @@ configMaps:
   forward-input.conf: |
     <source>
       @type tail
-      path /var/log/*.log
-      refresh_interval 10s
+      path /var/log/es/evaluator-rs.log
       <parse>
-        @type regexp
-        expression /^(?<message>.*)$/
+        @type multiline
+        format_firstline /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3} /
+        format1 /^(?<message>.*)$/
       </parse>
-      tag var_log
-      pos_file /var/log/fluentd_var_log.pos
+      multiline_flush_interval 5s
+      tag es_app
+      pos_file /var/log/es/evaluator-rs.log.pos
     </source>
   output.conf: |
     <match **>
@@ -120,7 +121,7 @@ configMaps:
       time_as_integer true
       <server>
         host logstash
-        port 5044
+        port 8080
       weight 100
       </server>
     </match>
