@@ -26,9 +26,8 @@ helm init
 echo '***** Sleep 1 minute for tiller to finish deploying *****'
 sleep 60
 
-echo '---- Cone helm chart repo ----'
-git clone git@github.com:wjche/helm-charts.git
-cd helm-charts
+echo '---- Change to repo root ----'
+cd ../
 
 echo '---- Deploy elasticsearch cluster in kubernetes ----'
 helm install --name elasticsearch ./elasticsearch -f elasticsearch/examples/minikube/values.yaml --version 7.1.1
