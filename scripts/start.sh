@@ -3,6 +3,8 @@ echo '==========================================================================
 echo '    This script sets up a local deployment with fluentd/logstash/kibana    '
 echo '    To Feed in data after the deployment is up
       use: kc cp evaluator-rs.log fluentd-xxx:/var/log/es/evaluator-rs.log to feed data    '
+
+echo '!!!!!! Prerequisites: minikube/virtualbox/helm !!!!!!'
 echo '======================================================================================='
 
 echo '---- Ensure minikube is installed ----'
@@ -45,8 +47,8 @@ sleep 60
 
 echo '---- Deploy fluentd in kubernetes ----'
 helm install --name fluentd stable/fluentd -f fluentd/values.yaml
-echo '***** Sleep 1 minute for fluentd to finish deploying *****'
-sleep 60
+echo '***** Sleep 2 minute for fluentd to finish deploying *****'
+sleep 120
 
 echo '---- Open localhost:5601 for kibana ----'
 kubectl port-forward deployment/kibana-kibana 5601
