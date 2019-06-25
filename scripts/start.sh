@@ -12,12 +12,12 @@ echo '---- Ensure virtual is installed ----'
 virtualbox --help
 
 echo '---- Ensure helm is installed ----'
-helm version
+helm help | grep Kubernetes
 
 echo '---- Start minikue ----'
 minikube start --memory 8192 --cpus 4 --disk-size 64g
-echo '***** Sleep 5 minutes for minikube and vm to be ready *****'
-sleep 300
+echo '***** Sleep 2 minutes for minikube and vm to be ready *****'
+sleep 120
 
 echo '---- Init tiller (helm server running in kubernetes cluster) ----'
 helm init
