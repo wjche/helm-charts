@@ -283,9 +283,9 @@ inputs:
       #   port => 1514
       #   type => syslog
       # }
-      #beats {
-      #  port => 5044
-      #}
+      beats {
+        port => 5044
+      }
       tcp {
         port => 8080
         codec => "fluent"
